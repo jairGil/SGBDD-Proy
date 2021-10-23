@@ -1,4 +1,5 @@
 import cx_Oracle
+from cx_Oracle import DatabaseError
 
 
 class Conexion:
@@ -16,7 +17,9 @@ class Conexion:
         try:
             self.conexion = cx_Oracle.connect(user=self.usuario, password=self.contrasena, dsn=self.dsn)
         except ConnectionError:
-            print("ERROR")
+            print("Error de conexion")
+        except DatabaseError:
+            print("No se encontro un listener")
 
     def desconectar(self):
         self.conexion.close()
@@ -36,5 +39,7 @@ if __name__ == '__main__':
 
     for column in cur.description:
         print(column)
+
+    print(type(cur))
 
     con.desconectar()

@@ -6,7 +6,6 @@ from Modelo.ModoPago import ModoPago
 
 class Window(QMainWindow):
     modo_pagos = []
-    list1 = []
 
     def __init__(self):
         super().__init__()
@@ -33,7 +32,7 @@ class Window(QMainWindow):
         combo_box.setGeometry(200, 150, 120, 40)
 
         for i in self.modo_pagos:
-            combo_box.addItem(i.__str__(), i)
+            combo_box.addItem(str(i), i)
 
         print(combo_box.itemData(2).detalles)
 
