@@ -3,26 +3,25 @@ from DML import *
 
 
 class DMLCategoria:
-    conexion = Conexion("SGBDD", "123", "localhost/xepdb1")
 
-    @SQLABC(conexion=conexion)
+    @SQLABC(conexion=cnx)
     def alta(self, categoria: Categoria):
-        return f"INSERT INTO categoria(id_categoria, nombre_categoria, descripcion_categoria) " \
-               f"VALUES ({categoria.id},'{categoria.nombre}','{categoria.descripcion}')"
+        return f"""INSERT INTO categoria(id_categoria, nombre_categoria, descripcion_categoria) 
+                   VALUES ({categoria.id},'{categoria.nombre}','{categoria.descripcion}')"""
 
-    @SQLABC(conexion=conexion)
+    @SQLABC(conexion=cnx)
     def baja(self, id: int):
-        return f"DELETE FROM categoria " \
-               f"WHERE id_categoria={id}"
+        return f"""DELETE FROM categoria 
+                   WHERE id_categoria={id}"""
 
-    @SQLABC(conexion=conexion)
+    @SQLABC(conexion=cnx)
     def cambio(self, categoria: Categoria):
-        return f"UPDATE categoria SET " \
-               f"nombre_categoria='{categoria.nombre}'," \
-               f"descripcion_categoria='{categoria.descripcion}'" \
-               f"WHERE id_categoria={categoria.id}"
+        return f"""UPDATE categoria SET 
+                   nombre_categoria='{categoria.nombre}', 
+                   descripcion_categoria='{categoria.descripcion}' 
+                   WHERE id_categoria={categoria.id}"""
 
-    @SQLC(conexion=conexion)
+    @SQLC(conexion=cnx)
     def consulta(self):
         return "SELECT * FROM categoria"
 
@@ -31,13 +30,13 @@ if __name__ == '__main__':
 
     dml = DMLCategoria()
 
-    categ = Categoria(1, "Pago", "pago")
+    categ = Categoria(1, "Hogar", "Articulos del hogar")
     dml.alta(categ)
 
     for cat in dml.consulta():
         print(cat)
 
-    categ = Categoria(1, "Efectivo", "Pagos en efectivo")
+    categ = Categoria(1, "Casa y jardin", "Articulos de casa y jardin")
     dml.cambio(categ)
 
     for cat in dml.consulta():

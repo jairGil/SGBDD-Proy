@@ -34,7 +34,7 @@ class Window(QMainWindow):
         for i in self.modo_pagos:
             combo_box.addItem(str(i), i)
 
-        print(combo_box.itemData(2).detalles)
+        print(combo_box.itemData(2))
 
 
 App = QApplication(sys.argv)

@@ -1,6 +1,8 @@
 from cx_Oracle import Cursor
 from Conexion import Conexion
 
+cnx = Conexion("SGBDD", "123", "localhost/xepdb1")
+
 
 class SQLABC:
     conexion: Conexion
@@ -47,14 +49,13 @@ class SQLC:
 
 
 if __name__ == '__main__':
-    con = Conexion("HR", "123", "localhost/xepdb1")
 
-    @SQLS(conexion=con)
+    @SQLC(conexion=con)
     def select():
         return "select * from employees where employee_id=200"
 
 
-    @SQLS(conexion=con)
+    @SQLC(conexion=con)
     def select_id(id: int):
         return f"select * from employees where employee_id={id}"
 
