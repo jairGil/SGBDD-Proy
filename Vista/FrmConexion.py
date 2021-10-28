@@ -1,24 +1,23 @@
-from PySide2.QtWidgets import QApplication, QMainWindow, QWidget, QFormLayout, QLabel, QLineEdit, QPushButton
-from PySide2.QtWidgets import QSpacerItem, QSizePolicy, QDesktopWidget
+from PySide2.QtWidgets import QWidget, QFormLayout, QLabel, QLineEdit, QPushButton
+from PySide2.QtWidgets import QSpacerItem, QSizePolicy
 from Controlador.Conexion import Conexion
 
 
-class FrmConexion(QMainWindow):
+class FrmConexion(QWidget):
     __con: Conexion
 
     def __init__(self):
         super().__init__()
-        self.central_widget = QWidget(self)
-        self.form_layout = QFormLayout(self.central_widget)
-        self.lbl_usuario = QLabel(self.central_widget)
-        self.txt_usuario = QLineEdit(self.central_widget)
-        self.lbl_contrasena = QLabel(self.central_widget)
-        self.txt_contrasena = QLineEdit(self.central_widget)
-        self.lbl_dsn = QLabel(self.central_widget)
-        self.txt_dsn = QLineEdit(self.central_widget)
+        self.form_layout = QFormLayout(self)
+        self.lbl_usuario = QLabel(self)
+        self.txt_usuario = QLineEdit(self)
+        self.lbl_contrasena = QLabel(self)
+        self.txt_contrasena = QLineEdit(self)
+        self.lbl_dsn = QLabel(self)
+        self.txt_dsn = QLineEdit(self)
         self.vertical_spacer = QSpacerItem(20, 40, QSizePolicy.Expanding, QSizePolicy.Expanding)
-        self.btn_conectar = QPushButton(self.central_widget)
-        self.lbl_estado = QLabel(self.central_widget)
+        self.btn_conectar = QPushButton(self)
+        self.lbl_estado = QLabel(self)
 
         self.setup_ui()
 
@@ -37,10 +36,8 @@ class FrmConexion(QMainWindow):
         self.form_layout.setItem(5, QFormLayout.FieldRole, self.vertical_spacer)
         self.form_layout.setWidget(6, QFormLayout.FieldRole, self.lbl_estado)
 
-        self.setCentralWidget(self.central_widget)
         self.btn_conectar.clicked.connect(self.conectar)
         self.retranslate_ui()
-        self.centrar_ventana()
 
     def retranslate_ui(self):
         self.setWindowTitle("Conexion")
@@ -58,18 +55,13 @@ class FrmConexion(QMainWindow):
 
         self.lbl_estado.setText(f"Estado: {self.__con.conectar()}")
 
-    def centrar_ventana(self):
-        # Obtener tamaño de pantalla
-        pantalla = QDesktopWidget().screenGeometry()
-        # Obtener el tamaño de la ventana
-        ventana = self.geometry()
-        # Mueva la ventana al centro de la pantalla
-        self.move(int((pantalla.width() - ventana.width()) / 2), int((pantalla.height() - ventana.height()) / 2))
-
 
 if __name__ == '__main__':
     import sys
+    from PySide2.QtWidgets import QApplication, QMainWindow
+
     app = QApplication(sys.argv)
-    mw = FrmConexion()
-    mw.show()
+    frm = QMainWindow()
+    frm.setCentralWidget(FrmConexion())
+    frm.show()
     sys.exit(app.exec_())
