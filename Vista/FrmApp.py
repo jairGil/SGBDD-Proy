@@ -12,7 +12,7 @@ class FrmApp(QMainWindow):
         self.show()
 
     def setup_ui(self):
-        self.resize(483, 373)
+        self.resize(400, 250)
 
         self.centralwidget.addWidget(self.pag_conexion)
 
