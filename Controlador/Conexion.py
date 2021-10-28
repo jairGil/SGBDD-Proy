@@ -16,10 +16,11 @@ class Conexion:
     def conectar(self):
         try:
             self.conexion = cx_Oracle.connect(user=self.usuario, password=self.contrasena, dsn=self.dsn)
+            return "Conectado"
         except ConnectionError:
-            print("Error de conexion")
+            return "Error de conexion"
         except DatabaseError:
-            print("No se encontro un listener")
+            return "No se encontro un listener"
 
     def desconectar(self):
         self.conexion.close()
