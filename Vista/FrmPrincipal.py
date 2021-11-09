@@ -1,15 +1,16 @@
 from PySide2.QtCore import Qt
 from PySide2.QtWidgets import QWidget, QHBoxLayout, QFrame, QTextEdit, QSplitter, QApplication
 
-from Vista.FrmPrincipalDerecho import FrmPrincipalDerecho
+from Vista.FrmPrincipalDer import FrmPrincipalDer
+from Vista.FrmPrincipalIzq import FrmPrincipalIzq
 
 
 class FrmPrincipal(QWidget):
     def __init__(self):
         super(FrmPrincipal, self).__init__()
         self.layout = QHBoxLayout(self)
-        self.frm_izquierdo = FrmPrincipalDerecho()
-        self.frm_derecho = QTextEdit()
+        self.frm_izquierdo = FrmPrincipalIzq()
+        self.frm_derecho = FrmPrincipalDer()
         self.splitter = QSplitter(Qt.Horizontal)
         self.init_ui()
 
@@ -31,4 +32,5 @@ if __name__ == '__main__':
     import sys
     app = QApplication(sys.argv)
     ex = FrmPrincipal()
+    ex.show()
     sys.exit(app.exec_())
