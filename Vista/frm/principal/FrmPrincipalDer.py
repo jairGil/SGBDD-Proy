@@ -1,4 +1,5 @@
-from PySide2.QtWidgets import QFrame, QGridLayout, QSpacerItem, QSizePolicy, QStackedWidget
+from PySide2.QtCore import Qt
+from PySide2.QtWidgets import QFrame, QGridLayout, QSpacerItem, QSizePolicy, QStackedWidget, QLabel
 
 
 class FrmPrincipalDer(QFrame):
@@ -17,7 +18,10 @@ class FrmPrincipalDer(QFrame):
         self.grid_layout.addWidget(self.stack, 1, 1)
 
         self.stack.setStyleSheet("background-color: red;")
-        self.stack.setMinimumSize(800, 600)
+        self.stack.setMinimumSize(900, 600)
+        lbl = QLabel("Aqui estoy", self.stack)
+        lbl.setAlignment(Qt.AlignCenter)
+        self.stack.addWidget(lbl)
 
 
 if __name__ == '__main__':

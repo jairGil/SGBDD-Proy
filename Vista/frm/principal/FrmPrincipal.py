@@ -1,8 +1,8 @@
 from PySide2.QtCore import Qt
-from PySide2.QtWidgets import QWidget, QHBoxLayout, QFrame, QTextEdit, QSplitter, QApplication
+from PySide2.QtWidgets import QWidget, QHBoxLayout, QFrame, QSplitter, QApplication
 
-from Vista.FrmPrincipalDer import FrmPrincipalDer
-from Vista.FrmPrincipalIzq import FrmPrincipalIzq
+from Vista.frm.principal.FrmPrincipalDer import FrmPrincipalDer
+from Vista.frm.principal.FrmPrincipalIzq import FrmPrincipalIzq
 
 
 class FrmPrincipal(QWidget):

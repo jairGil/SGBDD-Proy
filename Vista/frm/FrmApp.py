@@ -1,7 +1,7 @@
 from PySide2.QtWidgets import QMainWindow, QDesktopWidget, QApplication, QStackedWidget, QVBoxLayout
 
-from Vista.FrmConexion import FrmConexion
-from Vista.FrmPrincipal import FrmPrincipal
+from Vista.frm.FrmConexion import FrmConexion
+from Vista.frm.principal.FrmPrincipal import FrmPrincipal
 
 
 class FrmApp(QMainWindow):

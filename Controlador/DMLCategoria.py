@@ -6,24 +6,24 @@ class DMLCategoria:
 
     @SQLABC(conexion=cnx)
     def alta(self, categoria: Categoria):
-        return f"""INSERT INTO categoria(id_categoria, nombre_categoria, descripcion_categoria) 
+        return f"""INSERT INTO altas(id_categoria, nombre_categoria, descripcion_categoria) 
                    VALUES ({categoria.id},'{categoria.nombre}','{categoria.descripcion}')"""
 
     @SQLABC(conexion=cnx)
     def baja(self, id: int):
-        return f"""DELETE FROM categoria 
+        return f"""DELETE FROM altas 
                    WHERE id_categoria={id}"""
 
     @SQLABC(conexion=cnx)
     def cambio(self, categoria: Categoria):
-        return f"""UPDATE categoria SET 
+        return f"""UPDATE altas SET 
                    nombre_categoria='{categoria.nombre}', 
                    descripcion_categoria='{categoria.descripcion}' 
                    WHERE id_categoria={categoria.id}"""
 
     @SQLC(conexion=cnx)
     def consulta(self):
-        return "SELECT * FROM categoria"
+        return "SELECT * FROM altas"
 
 
 if __name__ == '__main__':

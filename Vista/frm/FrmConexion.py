@@ -1,6 +1,6 @@
 from PySide2.QtWidgets import QWidget, QFormLayout, QLabel, QLineEdit, QPushButton, QStackedWidget
 from Controlador.Conexion import Conexion
-from Vista.DlgAviso import DlgAviso
+from Vista.dlg.DlgAviso import DlgAviso
 
 
 class FrmConexion(QWidget):
