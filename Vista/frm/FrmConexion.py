@@ -1,4 +1,5 @@
-from PySide2.QtWidgets import QWidget, QFormLayout, QLabel, QLineEdit, QPushButton, QStackedWidget
+from PySide2.QtWidgets import QWidget, QGridLayout, QLabel, QLineEdit, QPushButton, QStackedWidget, QSpacerItem, \
+    QSizePolicy
 from Controlador.Conexion import Conexion
 from Vista.dlg.DlgAviso import DlgAviso
 
@@ -10,7 +11,7 @@ class FrmConexion(QWidget):
 
     def __init__(self, p: QStackedWidget):
         super().__init__(parent=p)
-        self.form_layout = QFormLayout(self)
+        self.layout = QGridLayout(self)
         self.lbl_usuario = QLabel("Usuario", self)
         self.txt_usuario = QLineEdit(self)
         self.lbl_contrasena = QLabel("Contraseña", self)
@@ -25,16 +26,22 @@ class FrmConexion(QWidget):
 
     def setup_ui(self):
         self.txt_contrasena.setEchoMode(QLineEdit.Password)
+        self.txt_usuario.setMinimumWidth(300)
 
-        self.form_layout.setWidget(0, QFormLayout.LabelRole, self.lbl_usuario)
-        self.form_layout.setWidget(0, QFormLayout.FieldRole, self.txt_usuario)
-        self.form_layout.setWidget(1, QFormLayout.LabelRole, self.lbl_contrasena)
-        self.form_layout.setWidget(1, QFormLayout.FieldRole, self.txt_contrasena)
-        self.form_layout.setWidget(2, QFormLayout.LabelRole, self.lbl_host)
-        self.form_layout.setWidget(2, QFormLayout.FieldRole, self.txt_host)
-        self.form_layout.setWidget(3, QFormLayout.LabelRole, self.lbl_servicio)
-        self.form_layout.setWidget(3, QFormLayout.FieldRole, self.txt_servicio)
-        self.form_layout.setWidget(4, QFormLayout.FieldRole, self.btn_conectar)
+        self.layout.addWidget(self.lbl_usuario, 1, 1)
+        self.layout.addWidget(self.txt_usuario, 1, 2, 1, 2)
+        self.layout.addWidget(self.lbl_contrasena, 2, 1)
+        self.layout.addWidget(self.txt_contrasena, 2, 2, 1, 2)
+        self.layout.addWidget(self.lbl_host, 3, 1)
+        self.layout.addWidget(self.txt_host, 3, 2, 1, 2)
+        self.layout.addWidget(self.lbl_servicio, 4, 1)
+        self.layout.addWidget(self.txt_servicio, 4, 2, 1, 2)
+        self.layout.addWidget(self.btn_conectar, 5, 2, 1, 2)
+
+        self.layout.addItem(QSpacerItem(20, 40, vData=QSizePolicy.Expanding), 0, 1)
+        self.layout.addItem(QSpacerItem(20, 40, vData=QSizePolicy.Expanding), 6, 1)
+        self.layout.addItem(QSpacerItem(40, 20, hData=QSizePolicy.Expanding), 1, 0)
+        self.layout.addItem(QSpacerItem(40, 20, hData=QSizePolicy.Expanding), 1, 4)
 
         self.btn_conectar.clicked.connect(self.conectar)
 

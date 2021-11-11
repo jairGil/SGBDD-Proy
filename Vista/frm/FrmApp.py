@@ -15,8 +15,9 @@ class FrmApp(QMainWindow):
         self.show()
 
     def setup_ui(self):
-        self.resize(400, 100)
+        self.resize(1000, 600)
         self.setWindowTitle("Sistema de gestión de inventario")
+        self.setStyleSheet("QFrame{background-color: #ECEFF1;}")
 
         self.stack_widget.addWidget(self.pag_conexion)
         self.stack_widget.addWidget(self.pag_app)

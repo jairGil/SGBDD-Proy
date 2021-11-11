@@ -10,6 +10,7 @@ class ConsultaCategoria(QWidget):
         self.setup_ui()
 
     def setup_ui(self):
+        self.layout.setMargin(0)
         self.tbl_consulta.setColumnCount(3)
         item_id = QTableWidgetItem("ID")
         self.tbl_consulta.setHorizontalHeaderItem(0, item_id)

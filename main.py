@@ -2,6 +2,7 @@ from PySide2.QtWidgets import *
 import sys
 
 from Modelo.ModoPago import ModoPago
+from Vista.frm.FrmApp import FrmApp
 
 
 class Window(QMainWindow):
@@ -37,8 +38,17 @@ class Window(QMainWindow):
         print(combo_box.itemData(2))
 
 
-App = QApplication(sys.argv)
+"""
+    App = QApplication(sys.argv)
+    
+    window = Window()
+    
+    sys.exit(App.exec_())
+"""
 
-window = Window()
+if __name__ == '__main__':
+    import sys
 
-sys.exit(App.exec_())
+    app = QApplication(sys.argv)
+    frm = FrmApp()
+    sys.exit(app.exec_())

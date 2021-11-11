@@ -51,23 +51,24 @@ class FrmPrincipalIzq(QFrame):
 
         self.setStyleSheet("""
             QFrame {
-                background-color: white;
+                background-color: #00ACC1;
             }
             
             QPushButton {
                 border: none;
-                background-color: white;
+                background-color: none;
+                color: #E0F7FA;
                 height: 30px;
                 text-align: left;
                 padding: 5px 10px 5px 10px;
             }
             
             QPushButton:hover {
-                background-color: red;
+                background-color: #00BCD4;
             }
             
             QPushButton:checked {
-                background-color: blue;
+                background-color: #0097A7;
             }
         """)
 

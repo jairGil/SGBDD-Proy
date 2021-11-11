@@ -1,5 +1,6 @@
 from PySide2.QtCore import Qt
 from PySide2.QtWidgets import QFrame, QGridLayout, QSpacerItem, QSizePolicy, QStackedWidget, QLabel
+from Vista.frm.frmderecho.FrmCategoria import FrmCategoria
 
 
 class FrmPrincipalDer(QFrame):
@@ -7,21 +8,24 @@ class FrmPrincipalDer(QFrame):
         super().__init__()
         self.grid_layout = QGridLayout(self)
         self.stack = QStackedWidget(self)
+        self.frm_categoria = FrmCategoria()
 
         self.setup_ui()
 
     def setup_ui(self):
+        self.setStyleSheet("QFrame{background-color: #ECEFF1;}")
+
         self.grid_layout.addItem(QSpacerItem(20, 5, vData=QSizePolicy.Minimum), 0, 1)
         self.grid_layout.addItem(QSpacerItem(20, 5, vData=QSizePolicy.Minimum), 2, 1)
         self.grid_layout.addItem(QSpacerItem(5, 5, hData=QSizePolicy.Expanding), 1, 0)
         self.grid_layout.addItem(QSpacerItem(5, 20, hData=QSizePolicy.Expanding), 1, 2)
         self.grid_layout.addWidget(self.stack, 1, 1)
 
-        self.stack.setStyleSheet("background-color: red;")
         self.stack.setMinimumSize(900, 600)
         lbl = QLabel("Aqui estoy", self.stack)
         lbl.setAlignment(Qt.AlignCenter)
         self.stack.addWidget(lbl)
+        self.stack.addWidget(self.frm_categoria)
 
 
 if __name__ == '__main__':
