@@ -12,7 +12,7 @@ class FrmCategoria(QTabWidget):
         self.alta = AltaCategoria()
         self.baja = BajaCategoria()
         self.cambio = CambioCategoria()
-        self.consulta = Consulta(["ID", "Categoria", "Descripcion"])
+        self.consulta = Consulta(["ID", "Categoria", "Descripcion"], [(1, "", "X"), (2, "Otro", "prueba")]*100)
 
         self.setup_ui()
 

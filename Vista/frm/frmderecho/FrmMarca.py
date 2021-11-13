@@ -12,7 +12,7 @@ class FrmMarca(QTabWidget):
         self.alta = AltaMarca()
         self.baja = BajaMarca()
         self.cambio = CambioMarca()
-        self.consulta = Consulta(["ID", "Marca"])
+        self.consulta = Consulta(["ID", "Marca"], [(1, "Algo"), (2, "otro")])
 
         self.setup_ui()
 
