@@ -1,6 +1,8 @@
 from PySide2.QtCore import Qt
 from PySide2.QtWidgets import QFrame, QGridLayout, QSpacerItem, QSizePolicy, QStackedWidget, QLabel
 from Vista.frm.frmderecho.FrmCategoria import FrmCategoria
+from Vista.frm.frmderecho.FrmMarca import FrmMarca
+from Vista.frm.frmderecho.FrmProducto import FrmProducto
 
 
 class FrmPrincipalDer(QFrame):
@@ -9,6 +11,8 @@ class FrmPrincipalDer(QFrame):
         self.grid_layout = QGridLayout(self)
         self.stack = QStackedWidget(self)
         self.frm_categoria = FrmCategoria()
+        self.frm_marca = FrmMarca()
+        self.frm_producto = FrmProducto()
 
         self.setup_ui()
 
@@ -26,6 +30,8 @@ class FrmPrincipalDer(QFrame):
         lbl.setAlignment(Qt.AlignCenter)
         self.stack.addWidget(lbl)
         self.stack.addWidget(self.frm_categoria)
+        self.stack.addWidget(self.frm_marca)
+        self.stack.addWidget(self.frm_producto)
 
 
 if __name__ == '__main__':

@@ -1,18 +1,18 @@
 from PySide2.QtWidgets import QTabWidget
 
-from Vista.frm.frmderecho.altas.AltaCategoria import AltaCategoria
-from Vista.frm.frmderecho.bajas.BajaCategoria import BajaCategoria
-from Vista.frm.frmderecho.cambios.CambioCategoria import CambioCategoria
+from Vista.frm.frmderecho.altas.AltaMarca import AltaMarca
+from Vista.frm.frmderecho.bajas.BajaMarca import BajaMarca
+from Vista.frm.frmderecho.cambios.CambioMarca import CambioMarca
 from Vista.frm.frmderecho.consultas.Consulta import Consulta
 
 
-class FrmCategoria(QTabWidget):
+class FrmMarca(QTabWidget):
     def __init__(self):
         super().__init__()
-        self.alta = AltaCategoria()
-        self.baja = BajaCategoria()
-        self.cambio = CambioCategoria()
-        self.consulta = Consulta(["ID", "Categoria", "Descripcion"])
+        self.alta = AltaMarca()
+        self.baja = BajaMarca()
+        self.cambio = CambioMarca()
+        self.consulta = Consulta(["ID", "Marca"])
 
         self.setup_ui()
 
@@ -41,6 +41,6 @@ if __name__ == '__main__':
     from PySide2.QtWidgets import QApplication
 
     app = QApplication(sys.argv)
-    w = FrmCategoria()
+    w = FrmMarca()
     w.show()
     sys.exit(app.exec_())
