@@ -56,5 +56,5 @@ class AltaProducto(QWidget):
         self.layout.addItem(self.v_spacer_2, 0, 3)
         self.layout.addItem(self.v_spacer_3, 8, 3)
 
-        self.btn_cancelar_alta.setObjectName(u"btn_cancelar_alta")
-        self.btn_agregar_alta.setObjectName(u"btn_agregar_alta")
+        self.btn_cancelar_alta.setObjectName(u"btn_rojo")
+        self.btn_agregar_alta.setObjectName(u"btn_azul")

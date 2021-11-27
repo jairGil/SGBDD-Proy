@@ -72,5 +72,5 @@ class BajaProducto(QWidget):
         self.layout.addItem(self.h_spacer, 1, 0)
         self.layout.addItem(self.h_spacer_2, 1, 4)
 
-        self.btn_cancelar_baja.setObjectName(u"btn_cancelar_baja")
-        self.btn_eliminar_baja.setObjectName(u"btn_eliminar_baja")
+        self.btn_cancelar_baja.setObjectName(u"btn_azul")
+        self.btn_eliminar_baja.setObjectName(u"btn_rojo")

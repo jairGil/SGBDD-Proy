@@ -37,7 +37,8 @@ class FrmPrincipal(QWidget):
         self.frm_izquierdo.btn_modo_pago.clicked.connect(self.change_pages)
         self.frm_izquierdo.btn_cliente.clicked.connect(self.change_pages)
         self.frm_izquierdo.btn_factura.clicked.connect(self.change_pages)
-        self.frm_izquierdo.btn_detalle.clicked.connect(self.change_pages)
+        self.frm_izquierdo.btn_historial_productos.clicked.connect(self.change_pages)
+        self.frm_izquierdo.btn_historial_precios.clicked.connect(self.change_pages)
 
     def change_pages(self) -> None:
         if self.frm_izquierdo.btn_inicio.isChecked():
@@ -54,8 +55,10 @@ class FrmPrincipal(QWidget):
             self.frm_derecho.stack.setCurrentIndex(5)
         if self.frm_izquierdo.btn_factura.isChecked():
             self.frm_derecho.stack.setCurrentIndex(6)
-        if self.frm_izquierdo.btn_detalle.isChecked():
+        if self.frm_izquierdo.btn_historial_productos.isChecked():
             self.frm_derecho.stack.setCurrentIndex(7)
+        if self.frm_izquierdo.btn_historial_precios.isChecked():
+            self.frm_derecho.stack.setCurrentIndex(8)
 
 
 if __name__ == '__main__':

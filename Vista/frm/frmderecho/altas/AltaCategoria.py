@@ -38,5 +38,5 @@ class AltaCategoria(QWidget):
         self.layout.addItem(self.v_spacer_2, 0, 3, 1, 1)
         self.layout.addItem(self.v_spacer_3, 5, 3, 1, 1)
 
-        self.btn_cancelar_alta.setObjectName(u"btn_cancelar_alta")
-        self.btn_agregar_alta.setObjectName(u"btn_agregar_alta")
+        self.btn_cancelar_alta.setObjectName(u"btn_rojo")
+        self.btn_agregar_alta.setObjectName(u"btn_azul")

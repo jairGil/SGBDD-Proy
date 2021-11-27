@@ -12,42 +12,32 @@ class FrmPrincipalIzq(QFrame):
         self.btn_modo_pago = QPushButton("Modo Pago", self)
         self.btn_cliente = QPushButton("Cliente", self)
         self.btn_factura = QPushButton("Factura", self)
-        self.btn_detalle = QPushButton("Detalle", self)
+        self.btn_historial_productos = QPushButton("Historial Productos", self)
+        self.btn_historial_precios = QPushButton("Historial Precios", self)
         self.btn_salir = QPushButton("Salir", self)
         self.spacer = QSpacerItem(20, 40, vData=QSizePolicy.Expanding)
+
+        self.botones = [self.btn_inicio, self.btn_categoria, self.btn_marca, self.btn_producto, self.btn_modo_pago,
+                        self.btn_cliente, self.btn_factura, self.btn_historial_productos, self.btn_historial_precios]
 
         self.setup_ui()
 
     def setup_ui(self):
         self.layout.setMargin(0)
-        self.layout.addWidget(self.btn_inicio)
-        self.layout.addWidget(self.btn_categoria)
-        self.layout.addWidget(self.btn_marca)
-        self.layout.addWidget(self.btn_producto)
-        self.layout.addWidget(self.btn_modo_pago)
-        self.layout.addWidget(self.btn_cliente)
-        self.layout.addWidget(self.btn_factura)
-        self.layout.addWidget(self.btn_detalle)
+
+        for b in self.botones:
+            self.layout.addWidget(b)
+
         self.layout.addItem(self.spacer)
         self.layout.addWidget(self.btn_salir)
 
-        self.btn_inicio.setAutoExclusive(True)
-        self.btn_categoria.setAutoExclusive(True)
-        self.btn_marca.setAutoExclusive(True)
-        self.btn_producto.setAutoExclusive(True)
-        self.btn_modo_pago.setAutoExclusive(True)
-        self.btn_cliente.setAutoExclusive(True)
-        self.btn_factura.setAutoExclusive(True)
-        self.btn_detalle.setAutoExclusive(True)
+        for b in self.botones:
+            b.setAutoExclusive(True)
 
-        self.btn_inicio.setCheckable(True)
-        self.btn_categoria.setCheckable(True)
-        self.btn_marca.setCheckable(True)
-        self.btn_producto.setCheckable(True)
-        self.btn_modo_pago.setCheckable(True)
-        self.btn_cliente.setCheckable(True)
-        self.btn_factura.setCheckable(True)
-        self.btn_detalle.setCheckable(True)
+        for b in self.botones:
+            b.setCheckable(True)
+
+        self.btn_inicio.setChecked(True)
 
         self.setStyleSheet("""
             QFrame {

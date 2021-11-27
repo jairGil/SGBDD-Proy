@@ -52,5 +52,5 @@ class CambioCategoria(QWidget):
         self.layout.addItem(self.h_spacer, 3, 0, 2, 1)
         self.layout.addItem(self.h_spacer_2, 3, 4, 2, 1)
 
-        self.btn_cancelar_cambio.setObjectName(u"btn_cancelar_cambio")
-        self.btn_modificar_cambio.setObjectName(u"btn_modificar_cambio")
+        self.btn_cancelar_cambio.setObjectName(u"btn_rojo")
+        self.btn_modificar_cambio.setObjectName(u"btn_azul")

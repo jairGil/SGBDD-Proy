@@ -17,19 +17,6 @@ class FrmCategoria(QTabWidget):
         self.setup_ui()
 
     def setup_ui(self):
-        self.setStyleSheet("""QPushButton#btn_agregar_alta,
-                               #btn_modificar_cambio,
-                               #btn_cancelar_baja {
-                               background-color: #0097A7;
-                               color: #E0F7FA;
-                               }
-                               QPushButton#btn_cancelar_alta, 
-                               #btn_cancelar_cambio,
-                               #btn_eliminar_baja {
-                               background-color: #B71C1C;
-                               color: #FFEBEE;
-                           }""")
-
         self.addTab(self.alta, "Alta")
         self.addTab(self.baja, "Baja")
         self.addTab(self.cambio, "Cambio")
