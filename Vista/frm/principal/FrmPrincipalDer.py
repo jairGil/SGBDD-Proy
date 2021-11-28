@@ -1,6 +1,7 @@
 from PySide2.QtCore import Qt
 from PySide2.QtWidgets import QFrame, QGridLayout, QSpacerItem, QSizePolicy, QStackedWidget, QLabel
 
+from Controlador.Conexion import Conexion
 from Vista.frm.frmderecho.FrmInicio import FrmInicio
 from Vista.frm.frmderecho.FrmCategoria import FrmCategoria
 from Vista.frm.frmderecho.FrmCliente import FrmCliente
@@ -13,8 +14,10 @@ from Vista.frm.frmderecho.FrmProducto import FrmProducto
 
 
 class FrmPrincipalDer(QFrame):
-    def __init__(self):
+    def __init__(self, conexion: Conexion):
         super().__init__()
+        self.conexion = conexion
+
         self.grid_layout = QGridLayout(self)
         self.stack = QStackedWidget(self)
         self.frm_inicio = FrmInicio(self)

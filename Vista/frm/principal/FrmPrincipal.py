@@ -13,7 +13,7 @@ class FrmPrincipal(QWidget):
 
         self.layout = QHBoxLayout(self)
         self.frm_izquierdo = FrmPrincipalIzq()
-        self.frm_derecho = FrmPrincipalDer()
+        self.frm_derecho = FrmPrincipalDer(self.conexion)
         self.splitter = QSplitter(Qt.Horizontal)
 
         self.init_ui()
@@ -71,6 +71,6 @@ class FrmPrincipal(QWidget):
 if __name__ == '__main__':
     import sys
     app = QApplication(sys.argv)
-    ex = FrmPrincipal()
+    ex = FrmPrincipal(Conexion("sgbdd", "123", "localhost/xepdb1"), QWidget())
     ex.show()
     sys.exit(app.exec_())

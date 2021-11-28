@@ -3,46 +3,51 @@ from DML import *
 
 
 class DMLCategoria:
+    def __init__(self, conexion: Conexion):
+        self.__conexion = conexion
+        self.__dml = DML(self.__conexion)
 
-    @SQLABC(conexion=cnx)
     def alta(self, categoria: Categoria):
-        return f"""INSERT INTO altas(id_categoria, nombre_categoria, descripcion_categoria) 
-                   VALUES ({categoria.id},'{categoria.nombre}','{categoria.descripcion}')"""
+        self.__dml.altas_bajas_cambios(f"""
+            INSERT INTO sgbdd.categoria(id_categoria, nombre_categoria, descripcion_categoria) 
+            VALUES ({categoria.id},'{categoria.nombre}','{categoria.descripcion}')""")
 
-    @SQLABC(conexion=cnx)
     def baja(self, id: int):
-        return f"""DELETE FROM altas 
-                   WHERE id_categoria={id}"""
+        self.__dml.altas_bajas_cambios(f"""
+            DELETE FROM sgbdd.categoria 
+            WHERE id_categoria={id}""")
 
-    @SQLABC(conexion=cnx)
     def cambio(self, categoria: Categoria):
-        return f"""UPDATE altas SET 
-                   nombre_categoria='{categoria.nombre}', 
-                   descripcion_categoria='{categoria.descripcion}' 
-                   WHERE id_categoria={categoria.id}"""
+        self.__dml.altas_bajas_cambios(f"""
+            UPDATE sgbdd.categoria SET 
+            nombre_categoria='{categoria.nombre}', 
+            descripcion_categoria='{categoria.descripcion}' 
+            WHERE id_categoria={categoria.id}""")
 
-    @SQLC(conexion=cnx)
     def consulta(self):
-        return "SELECT * FROM altas"
+        return self.__dml.consulta("SELECT * FROM sgbdd.categoria")
 
 
 if __name__ == '__main__':
+    cnx = Conexion("usr_administrador", "123", "localhost/xepdb1")
 
-    dml = DMLCategoria()
+    dml = DMLCategoria(cnx)
 
-    categ = Categoria(1, "Hogar", "Articulos del hogar")
+    dml.baja(2)
+
+    categ = Categoria(2, "Hogar", "Articulos del hogar")
     dml.alta(categ)
 
     for cat in dml.consulta():
         print(cat)
 
-    categ = Categoria(1, "Casa y jardin", "Articulos de casa y jardin")
+    categ = Categoria(2, "Casa y jardin", "Articulos de casa y jardin")
     dml.cambio(categ)
 
     for cat in dml.consulta():
         print(cat)
 
-    dml.baja(1)
+    dml.baja(2)
 
     for cat in dml.consulta():
         print(cat)

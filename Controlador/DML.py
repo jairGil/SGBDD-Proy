@@ -1,65 +1,24 @@
-from cx_Oracle import Cursor
-from Conexion import Conexion
-
-cnx = Conexion("SGBDD", "123", "192.168.0.19/xepdb1")
+from Controlador.Conexion import Conexion
 
 
-class SQLABC:
+class DML:
     conexion: Conexion
-    cursor: Cursor
 
     def __init__(self, conexion):
         self.conexion = conexion
+        self.cursor = None
 
-    def __call__(self, original_func):
-        decorator_self = self
+    def altas_bajas_cambios(self, sql):
+        self.conexion.conectar()
+        self.cursor = self.conexion.conexion.cursor()
+        self.cursor.execute(sql)
+        self.conexion.conexion.commit()
+        self.conexion.desconectar()
 
-        def c(*args):
-            decorator_self.conexion.conectar()
-            decorator_self.cursor = decorator_self.conexion.conexion.cursor()
-
-            sql = original_func(*args)
-
-            decorator_self.cursor.execute(sql)
-            decorator_self.conexion.conexion.commit()
-            decorator_self.conexion.desconectar()
-        return c
-
-
-class SQLC:
-    con: Conexion
-    cursor: Cursor
-
-    def __init__(self, conexion):
-        self.con = conexion
-
-    def __call__(self, original_func):
-        decorator_self = self
-
-        def c(*args):
-            decorator_self.con.conectar()
-            decorator_self.cursor = decorator_self.con.conexion.cursor()
-
-            sql = original_func(*args)
-
-            datos = list(decorator_self.cursor.execute(sql))
-            decorator_self.con.desconectar()
-            return datos
-        return c
-
-
-if __name__ == '__main__':
-
-    @SQLC(conexion=cnx)
-    def select():
-        return "select * from employees where employee_id=200"
-
-
-    @SQLC(conexion=cnx)
-    def select_id(id: int):
-        return f"select * from employees where employee_id={id}"
-
-    for element in select():
-        print(element)
-
-    print(select_id(130))
+    def consulta(self, sql):
+        self.conexion.conectar()
+        self.cursor = self.conexion.conexion.cursor()
+        self.cursor.execute(sql)
+        datos = self.cursor.fetchall()
+        self.conexion.desconectar()
+        return datos
