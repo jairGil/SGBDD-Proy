@@ -1,5 +1,7 @@
 from PySide2.QtCore import Qt
 from PySide2.QtWidgets import QFrame, QGridLayout, QSpacerItem, QSizePolicy, QStackedWidget, QLabel
+
+from Vista.frm.frmderecho.FrmInicio import FrmInicio
 from Vista.frm.frmderecho.FrmCategoria import FrmCategoria
 from Vista.frm.frmderecho.FrmCliente import FrmCliente
 from Vista.frm.frmderecho.FrmFactura import FrmFactura
@@ -15,6 +17,7 @@ class FrmPrincipalDer(QFrame):
         super().__init__()
         self.grid_layout = QGridLayout(self)
         self.stack = QStackedWidget(self)
+        self.frm_inicio = FrmInicio(self)
         self.frm_categoria = FrmCategoria()
         self.frm_marca = FrmMarca()
         self.frm_producto = FrmProducto()
@@ -47,9 +50,7 @@ class FrmPrincipalDer(QFrame):
         self.grid_layout.addWidget(self.stack, 1, 1)
 
         self.stack.setMinimumSize(900, 600)
-        lbl = QLabel("Aqui estoy", self.stack)
-        lbl.setAlignment(Qt.AlignCenter)
-        self.stack.addWidget(lbl)
+        self.stack.addWidget(self.frm_inicio)
         self.stack.addWidget(self.frm_categoria)
         self.stack.addWidget(self.frm_marca)
         self.stack.addWidget(self.frm_producto)

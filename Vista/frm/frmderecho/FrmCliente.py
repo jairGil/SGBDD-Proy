@@ -12,7 +12,7 @@ class FrmCliente(QTabWidget):
         self.alta = AltaCliente()
         self.baja = BajaCliente()
         self.cambio = CambioCliente()
-        self.consulta = Consulta(["ID", "Marca"], [(1, "Algo"), (2, "otro")])
+        self.consulta = Consulta(["ID", "Nombre", "Apellido", "Email", "Telefono"], [])
 
         self.setup_ui()
 

@@ -17,9 +17,9 @@ class CambioProducto(QWidget):
         self.lbl_stock_cambio = QLabel("Stock", self)
         self.txt_stock_cambio = QLineEdit(self)
         self.lbl_categoria_cambio = QLabel("Categoria", self)
-        self.txt_categoria_cambio = QLineEdit(self)
+        self.cmbx_categoria_cambio = QComboBox(self)
         self.lbl_marca_cambio = QLabel("Marca", self)
-        self.txt_marca_cambio = QLineEdit(self)
+        self.cmbx_marca_cambio = QComboBox(self)
         self.btn_cancelar_cambio = QPushButton("Cancelar", self)
         self.btn_modificar_cambio = QPushButton("Modificar", self)
 
@@ -53,10 +53,10 @@ class CambioProducto(QWidget):
         self.layout.addWidget(self.txt_stock_cambio, 6, 2, 1, 2)
 
         self.layout.addWidget(self.lbl_categoria_cambio, 7, 1)
-        self.layout.addWidget(self.txt_categoria_cambio, 7, 2, 1, 2)
+        self.layout.addWidget(self.cmbx_categoria_cambio, 7, 2, 1, 2)
 
         self.layout.addWidget(self.lbl_marca_cambio, 8, 1)
-        self.layout.addWidget(self.txt_marca_cambio, 8, 2, 1, 2)
+        self.layout.addWidget(self.cmbx_marca_cambio, 8, 2, 1, 2)
 
         self.layout.addWidget(self.btn_cancelar_cambio, 10, 2)
         self.layout.addWidget(self.btn_modificar_cambio, 10, 3)

@@ -1,5 +1,5 @@
-from PySide2.QtWidgets import QFrame, QGridLayout, QLabel, QLineEdit, QPushButton, QSizePolicy, QSpacerItem, QVBoxLayout, \
-    QWidget
+from PySide2.QtWidgets import QFrame, QGridLayout, QLabel, QLineEdit, QPushButton, QSizePolicy, QSpacerItem, \
+    QVBoxLayout, QWidget
 
 
 class FrmFactura(QWidget):
@@ -9,7 +9,6 @@ class FrmFactura(QWidget):
         self.lbl_id_buscar = QLabel("ID FACTURA:", self)
         self.txt_id = QLineEdit(self)
         self.btn_buscar = QPushButton("Buscar", self)
-        self.btn_genera_pdf = QPushButton("Generar PDF", self)
         self.frm_factura = QFrame(self)
         self.layout_factura = QVBoxLayout(self.frm_factura)
         self.frm_datos_factura = QFrame(self.frm_factura)
@@ -43,7 +42,6 @@ class FrmFactura(QWidget):
         self.layout_principal.addWidget(self.txt_id, 0, 2, 1, 3)
         self.layout_principal.addWidget(self.btn_buscar, 0, 5)
         self.layout_principal.addWidget(self.frm_factura, 1, 1, 1, 5)
-        self.layout_principal.addWidget(self.btn_genera_pdf, 2, 5)
         self.layout_principal.addItem(spacer_item, 1, 6)
         self.layout_principal.addItem(spacer_item1, 1, 0)
 
