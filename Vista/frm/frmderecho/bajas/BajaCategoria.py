@@ -1,5 +1,7 @@
 from PySide2.QtWidgets import QWidget, QGridLayout, QLineEdit, QSpacerItem, QSizePolicy, QComboBox, QLabel, QPushButton
 
+from Modelo.Categoria import Categoria
+
 
 class BajaCategoria(QWidget):
     def __init__(self):
@@ -56,3 +58,21 @@ class BajaCategoria(QWidget):
 
         self.btn_cancelar_baja.setObjectName(u"btn_azul")
         self.btn_eliminar_baja.setObjectName(u"btn_rojo")
+
+        self.btn_cancelar_baja.clicked.connect(self.limpiar_campos)
+
+    def agregar_datos(self):
+        index = self.cmbx_categoria_baja.currentIndex()
+        if index:
+            categoria = self.cmbx_categoria_baja.itemData(index)
+            self.txt_id_baja.setText(str(categoria.id))
+            self.txt_nombre_baja.setText(str(categoria.nombre))
+            self.txt_descripcion_baja.setText(str(categoria.descripcion))
+        else:
+            self.limpiar_campos()
+
+    def limpiar_campos(self):
+        self.cmbx_categoria_baja.setCurrentIndex(0)
+        self.txt_id_baja.setText("")
+        self.txt_nombre_baja.setText("")
+        self.txt_descripcion_baja.setText("")

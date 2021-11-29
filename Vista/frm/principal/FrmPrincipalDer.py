@@ -21,7 +21,7 @@ class FrmPrincipalDer(QFrame):
         self.grid_layout = QGridLayout(self)
         self.stack = QStackedWidget(self)
         self.frm_inicio = FrmInicio(self)
-        self.frm_categoria = FrmCategoria()
+        self.frm_categoria = FrmCategoria(self)
         self.frm_marca = FrmMarca()
         self.frm_producto = FrmProducto()
         self.frm_modo_pago = FrmModoPago()

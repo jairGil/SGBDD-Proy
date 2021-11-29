@@ -1,5 +1,6 @@
 from Modelo.Categoria import Categoria
-from DML import *
+from Controlador.DML import DML
+from Controlador.Conexion import Conexion
 
 
 class DMLCategoria:
@@ -25,7 +26,10 @@ class DMLCategoria:
             WHERE id_categoria={categoria.id}""")
 
     def consulta(self):
-        return self.__dml.consulta("SELECT * FROM sgbdd.categoria")
+        encabezados = ["ID", "Nombre", "Descripcion"]
+        datos = self.__dml.consulta("SELECT id_categoria, nombre_categoria, descripcion_categoria " 
+                                    "FROM sgbdd.categoria")
+        return encabezados, datos
 
 
 if __name__ == '__main__':

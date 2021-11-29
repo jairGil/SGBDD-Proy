@@ -21,7 +21,7 @@ class FrmInicio(QFrame):
         self.ded_fecha_fin = QDateEdit(self)
         self.btn_buscar = QPushButton("Buscar", self)
 
-        self.tbl_consulta = Consulta([], [])
+        self.tbl_consulta = Consulta()
 
         self.radio_buttons = [self.rbtn_dia, self.rbtn_mes, self.rbtn_anio, self.rbtn_rango]
         self.dates = [self.ded_dia, self.ded_mes, self.ded_anio, self.ded_fecha_inicio, self.ded_fecha_fin]

@@ -6,7 +6,7 @@ class FrmHistorialProducto(QWidget):
     def __init__(self):
         super().__init__()
         self.layout = QGridLayout(self)
-        self.consulta = Consulta(["Fecha", "Producto anteror", "Producto nuevo", "Operacion"], [])
+        self.consulta = Consulta()
 
         self.setup_ui()
 

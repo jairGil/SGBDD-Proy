@@ -12,7 +12,7 @@ class FrmProducto(QTabWidget):
         self.alta = AltaProducto()
         self.baja = BajaProducto()
         self.cambio = CambioProducto()
-        self.consulta = Consulta(["ID", "Nombre", "Precio", "Stock", "Categoria", "Marca"], [])
+        self.consulta = Consulta()
 
         self.setup_ui()
 

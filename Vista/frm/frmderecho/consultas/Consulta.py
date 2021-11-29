@@ -4,20 +4,15 @@ from PySide2.QtWidgets import QWidget, QGridLayout, QTableWidget, QTableWidgetIt
 
 
 class Consulta(QWidget):
-    def __init__(self, columnas: list, datos: [()]):
+    def __init__(self):
         super().__init__()
-        if datos is None:
-            datos = [None]
         self.layout = QGridLayout(self)
         self.tbl_consulta = QTableWidget(self)
-        self.columnas = columnas
-        self.datos = datos
 
         self.setup_ui()
 
     def setup_ui(self):
         self.layout.setMargin(0)
-        self.tbl_consulta.setColumnCount(len(self.columnas))
         self.tbl_consulta.setEditTriggers(QAbstractItemView.NoEditTriggers)
         self.tbl_consulta.setSelectionBehavior(QAbstractItemView.SelectRows)
         self.tbl_consulta.setSortingEnabled(True)
@@ -26,18 +21,18 @@ class Consulta(QWidget):
         self.tbl_consulta.setRowCount(0)
         self.tbl_consulta.horizontalHeader().setStretchLastSection(True)
 
-        self.agrega_encabezados()
-        self.agrega_datos()
-
         self.layout.addWidget(self.tbl_consulta, 0, 0)
 
-    def agrega_encabezados(self):
-        for i, col in enumerate(self.columnas):
-            item_id = QTableWidgetItem(col)
-            self.tbl_consulta.setHorizontalHeaderItem(i, item_id)
+    def agrega_items(self, encabezados, datos):
+        self.agrega_encabezados(encabezados)
+        self.agrega_datos(datos)
 
-    def agrega_datos(self):
-        self.tbl_consulta.setRowCount(len(self.datos))
-        for i, dato in enumerate(self.datos):
+    def agrega_encabezados(self, encabezados):
+        self.tbl_consulta.setColumnCount(len(encabezados))
+        self.tbl_consulta.setHorizontalHeaderLabels(encabezados)
+
+    def agrega_datos(self, datos):
+        self.tbl_consulta.setRowCount(len(datos))
+        for i, dato in enumerate(datos):
             for j, campo in enumerate(dato):
                 self.tbl_consulta.setItem(i, j, QTableWidgetItem(campo.__str__()))

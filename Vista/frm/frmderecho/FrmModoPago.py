@@ -12,8 +12,7 @@ class FrmModoPago(QTabWidget):
         self.alta = AltaModoPago()
         self.baja = BajaModoPago()
         self.cambio = CambioModoPago()
-        self.consulta = Consulta(["ID", "Modo Pago", "Detalles"],
-                                 [(1, "Efectivo", "Pagos en efectivo"), (2, "Transferencia", "Pagos por transferencia")])
+        self.consulta = Consulta()
 
         self.setup_ui()
 
