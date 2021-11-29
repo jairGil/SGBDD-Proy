@@ -1,33 +1,36 @@
+import cx_Oracle
+
 from Modelo.Producto import Producto
 from DML import *
 
 
 class DMLProducto:
+    def __init__(self, conexion: Conexion):
+        self.__conexion = conexion
+        self.__dml = DML(self.__conexion)
 
-    @SQLABC(conexion=cnx)
     def alta(self, producto: Producto):
-        return f"""INSERT INTO producto(id_producto, nombre_producto, precio_producto, stock, id_categoria, id_marca) 
-                   VALUES ({producto.id},'{producto.nombre}', {producto.precio}, {producto.stock}, 
-                            {producto.categoria.id}, {producto.marca.id})"""
+        procedimiento = "sgbdd.alta_producto"
+        argumentos = [producto.id, producto.nombre, producto.precio, producto.stock, producto.categoria.id,
+                      producto.marca.id]
+        self.__dml.procedimiento(procedimiento, argumentos)
 
-    @SQLABC(conexion=cnx)
     def baja(self, id: int):
-        return f"""DELETE FROM producto 
-                   WHERE id_producto={id}"""
+        self.__dml.bajas_cambios(f"""
+                                    DELETE FROM sgbdd.producto 
+                                    WHERE id_producto={id}""")
 
-    @SQLABC(conexion=cnx)
     def cambio(self, producto: Producto):
-        return f"""UPDATE producto SET 
-                   nombre_producto='{producto.nombre}', 
-                   precio_producto={producto.precio}, 
-                   stocK={producto.stock}, 
-                   id_categoria={producto.categoria.id}, 
-                   id_marca={producto.marca.id} 
-                   WHERE id_producto={producto.id}"""
+        self.__dml.bajas_cambios(f"""
+                                    UPDATE sgbdd.producto SET 
+                                    prod = sgbdd.PRODUCTO_OBJ('{producto.nombre}', {producto.precio}), 
+                                    stock={producto.stock}, 
+                                    id_categoria={producto.categoria.id}, 
+                                    id_marca={producto.marca.id} 
+                                    WHERE id_producto={producto.id}""")
 
-    @SQLC(conexion=cnx)
     def consulta(self):
-        return "SELECT * FROM producto"
+        return self.__dml.consulta("SELECT * FROM sgbdd.producto")
 
 
 if __name__ == '__main__':
@@ -36,9 +39,11 @@ if __name__ == '__main__':
     from Controlador.DMLCategoria import DMLCategoria
     from Controlador.DMLMarca import DMLMarca
 
-    dml_prod = DMLProducto()
-    dml_cat = DMLCategoria()
-    dml_mar = DMLMarca()
+    cnx = Conexion("usr_administrador", "123", "localhost/xepdb1")
+
+    dml_prod = DMLProducto(cnx)
+    dml_cat = DMLCategoria(cnx)
+    dml_mar = DMLMarca(cnx)
 
     dml_prod.baja(1)
     dml_mar.baja(1)

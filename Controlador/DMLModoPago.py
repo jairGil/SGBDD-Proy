@@ -3,32 +3,35 @@ from DML import *
 
 
 class DMLModoPago:
+    def __init__(self, conexion: Conexion):
+        self.__conexion = conexion
+        self.__dml = DML(self.__conexion)
 
-    @SQLABC(conexion=cnx)
     def alta(self, modo_pago: ModoPago):
-        return f"""INSERT INTO modo_pago(id_modo_pago, nombre_modo_pago, detalles_modo_pago) 
-                   VALUES ({modo_pago.id},'{modo_pago.nombre}','{modo_pago.detalles}')"""
+        procedimiento = "sgbdd.alta_modo_pago"
+        argumentos = [modo_pago.id, modo_pago.nombre, modo_pago.detalles]
+        self.__dml.procedimiento(procedimiento, argumentos)
 
-    @SQLABC(conexion=cnx)
     def baja(self, id: int):
-        return f"""DELETE FROM modo_pago 
-                   WHERE id_modo_pago={id}"""
+        self.__dml.bajas_cambios(f"""
+                                    DELETE FROM sgbdd.modo_pago 
+                                    WHERE id_modo_pago={id}""")
 
-    @SQLABC(conexion=cnx)
     def cambio(self, modo_pago: ModoPago):
-        return f"""UPDATE modo_pago SET 
-                   nombre_modo_pago='{modo_pago.nombre}', 
-                   detalles_modo_pago='{modo_pago.detalles}' 
-                   WHERE id_modo_pago={modo_pago.id}"""
+        self.__dml.bajas_cambios(f"""
+                                    UPDATE sgbdd.modo_pago SET 
+                                    nombre_modo_pago='{modo_pago.nombre}', 
+                                    detalles_modo_pago='{modo_pago.detalles}' 
+                                    WHERE id_modo_pago={modo_pago.id}""")
 
-    @SQLC(conexion=cnx)
     def consulta(self):
-        return "SELECT * FROM modo_pago"
+        return self.__dml.consulta("SELECT * FROM sgbdd.modo_pago")
 
 
 if __name__ == '__main__':
+    cnx = Conexion("usr_administrador", "123", "localhost/xepdb1")
 
-    dml = DMLModoPago()
+    dml = DMLModoPago(cnx)
 
     mp = ModoPago(1, "Efectivo", "Pagos en efectivo")
     dml.alta(mp)

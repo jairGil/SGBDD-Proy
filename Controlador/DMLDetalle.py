@@ -3,29 +3,31 @@ from DML import *
 
 
 class DMLDetalle:
-    @SQLABC(conexion=cnx)
+    def __init__(self, conexion: Conexion):
+        self.__conexion = conexion
+        self.__dml = DML(self.__conexion)
+
     def alta(self, detalle: Detalle):
-        return f"""INSERT INTO detalle (id_detalle, id_factura, id_producto, cantidad_detalle, precio_detalle) 
-                    VALUES ({detalle.id}, {detalle.factura.id}, {detalle.producto.id}, {detalle.cantidad}, 
-                    {detalle.precio})"""
+        procedimiento = "sgbdd.alta_detalle"
+        argumentos = [detalle.id, detalle.factura.id, detalle.producto.id, detalle.cantidad, detalle.precio]
+        self.__dml.procedimiento(procedimiento, argumentos)
 
-    @SQLABC(conexion=cnx)
     def baja(self, id: int):
-        return f"""DELETE FROM detalle 
-                       WHERE id_detalle={id}"""
+        self.__dml.bajas_cambios(f"""   
+                                    DELETE FROM sgbdd.detalle 
+                                    WHERE id_detalle={id}""")
 
-    @SQLABC(conexion=cnx)
     def cambio(self, detalle: Detalle):
-        return f"""UPDATE detalle SET 
-                       id_factura={detalle.id}, 
-                       id_producto={detalle.producto.id}, 
-                       cantidad_detalle={detalle.cantidad},
-                       precio_detalle={detalle.precio}
-                       WHERE id_detalle={detalle.id}"""
+        self.__dml.bajas_cambios(f"""
+                        UPDATE sgbdd.detalle SET 
+                        id_factura={detalle.id}, 
+                        id_producto={detalle.producto.id}, 
+                        cantidad_detalle={detalle.cantidad},
+                        precio_detalle={detalle.precio}
+                        WHERE id_detalle={detalle.id}""")
 
-    @SQLC(conexion=cnx)
     def consulta(self):
-        return "SELECT * FROM detalle"
+        return self.__dml.consulta("SELECT * FROM sgbdd.detalle")
 
 
 if __name__ == '__main__':
@@ -43,13 +45,15 @@ if __name__ == '__main__':
     from Controlador.DMLCategoria import DMLCategoria
     from Controlador.DMLMarca import DMLMarca
 
-    dml_det = DMLDetalle()
-    dml_fact = DMLFactura()
-    dml_mp = DMLModoPago()
-    dml_clie = DMLCliente()
-    dml_prod = DMLProducto()
-    dml_cat = DMLCategoria()
-    dml_mar = DMLMarca()
+    cnx = Conexion("usr_administrador", "123", "localhost/xepdb1")
+
+    dml_det = DMLDetalle(cnx)
+    dml_fact = DMLFactura(cnx)
+    dml_mp = DMLModoPago(cnx)
+    dml_clie = DMLCliente(cnx)
+    dml_prod = DMLProducto(cnx)
+    dml_cat = DMLCategoria(cnx)
+    dml_mar = DMLMarca(cnx)
 
     dml_det.baja(1)
     dml_fact.baja(1)

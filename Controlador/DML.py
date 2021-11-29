@@ -8,7 +8,7 @@ class DML:
         self.conexion = conexion
         self.cursor = None
 
-    def altas_bajas_cambios(self, sql):
+    def bajas_cambios(self, sql):
         self.conexion.conectar()
         self.cursor = self.conexion.conexion.cursor()
         self.cursor.execute(sql)
@@ -22,3 +22,10 @@ class DML:
         datos = self.cursor.fetchall()
         self.conexion.desconectar()
         return datos
+
+    def procedimiento(self, proc: str, args: []):
+        self.conexion.conectar()
+        self.cursor = self.conexion.conexion.cursor()
+        self.cursor.callproc(proc, args)
+        self.conexion.conexion.commit()
+        self.conexion.desconectar()

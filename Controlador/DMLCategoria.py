@@ -8,17 +8,17 @@ class DMLCategoria:
         self.__dml = DML(self.__conexion)
 
     def alta(self, categoria: Categoria):
-        self.__dml.altas_bajas_cambios(f"""
-            INSERT INTO sgbdd.categoria(id_categoria, nombre_categoria, descripcion_categoria) 
-            VALUES ({categoria.id},'{categoria.nombre}','{categoria.descripcion}')""")
+        procedimiento = "sgbdd.alta_categoria"
+        argumentos = [categoria.id, categoria.nombre, categoria.descripcion]
+        self.__dml.procedimiento(procedimiento, argumentos)
 
     def baja(self, id: int):
-        self.__dml.altas_bajas_cambios(f"""
-            DELETE FROM sgbdd.categoria 
-            WHERE id_categoria={id}""")
+        self.__dml.bajas_cambios(f"""
+                                    DELETE FROM sgbdd.categoria 
+                                    WHERE id_categoria={id}""")
 
     def cambio(self, categoria: Categoria):
-        self.__dml.altas_bajas_cambios(f"""
+        self.__dml.bajas_cambios(f"""
             UPDATE sgbdd.categoria SET 
             nombre_categoria='{categoria.nombre}', 
             descripcion_categoria='{categoria.descripcion}' 

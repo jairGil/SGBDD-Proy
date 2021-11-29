@@ -3,34 +3,37 @@ from DML import *
 
 
 class DMLCliente:
+    def __init__(self, conexion: Conexion):
+        self.__conexion = conexion
+        self.__dml = DML(self.__conexion)
 
-    @SQLABC(conexion=cnx)
     def alta(self, cliente: Cliente):
-        return f"""INSERT INTO cliente(id_cliente, email_cliente, nombre_cliente, apellido_cliente, telefono_cliente) 
-                VALUES ({cliente.id},'{cliente.email}', '{cliente.nombre}', '{cliente.apellido}', {cliente.telefono})"""
+        procedimiento = "sgbdd.alta_cliente"
+        argumentos = [cliente.id, cliente.email, cliente.nombre, cliente.apellido, cliente.telefono]
+        self.__dml.procedimiento(procedimiento, argumentos)
 
-    @SQLABC(conexion=cnx)
     def baja(self, id: int):
-        return f"""DELETE FROM cliente 
-                   WHERE id_cliente={id}"""
+        self.__dml.bajas_cambios(f"""
+                                    DELETE FROM sgbdd.cliente 
+                                    WHERE id_cliente={id}""")
 
-    @SQLABC(conexion=cnx)
     def cambio(self, cliente: Cliente):
-        return f"""UPDATE cliente SET 
-                   nombre_cliente='{cliente.nombre}', 
-                   email_cliente='{cliente.email}',  
-                   apellido_cliente='{cliente.apellido}', 
-                   telefono_cliente={cliente.telefono} 
-                   WHERE id_cliente={cliente.id}"""
+        self.__dml.bajas_cambios(f"""
+                                    UPDATE sgbdd.cliente SET 
+                                    nombre_cliente='{cliente.nombre}', 
+                                    email_cliente='{cliente.email}',  
+                                    apellido_cliente='{cliente.apellido}', 
+                                    telefono_cliente={cliente.telefono} 
+                                    WHERE id_cliente={cliente.id}""")
 
-    @SQLC(conexion=cnx)
     def consulta(self):
-        return "SELECT * FROM cliente"
+        return self.__dml.consulta("SELECT * FROM sgbdd.cliente")
 
 
 if __name__ == '__main__':
+    cnx = Conexion("usr_administrador", "123", "localhost/xepdb1")
 
-    dml = DMLCliente()
+    dml = DMLCliente(cnx)
 
     dml.baja(1)
 

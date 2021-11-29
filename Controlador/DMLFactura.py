@@ -1,31 +1,35 @@
+import cx_Oracle
+
 from Modelo.Factura import Factura
 from DML import *
 
 
 class DMLFactura:
-    @SQLABC(conexion=cnx)
+    def __init__(self, conexion: Conexion):
+        self.__conexion = conexion
+        self.__dml = DML(self.__conexion)
+
     def alta(self, factura: Factura):
-        return f"""INSERT INTO factura(id_factura, id_cliente, fecha_factura, id_modo_pago) 
-                    VALUES ({factura.id},{factura.cliente.id}, 
-                    TO_DATE('{factura.fecha.strftime("%m/%d/%Y %H:%M:%S")}', 'MM/DD/YYYY HH24:MI:SS'), 
-                    {factura.pago.id})"""
+        procedimiento = "sgbdd.alta_factura"
+        argumentos = [factura.id, factura.cliente.id, factura.pago.id]
+        self.__dml.procedimiento(procedimiento, argumentos)
 
-    @SQLABC(conexion=cnx)
     def baja(self, id: int):
-        return f"""DELETE FROM factura 
-                       WHERE id_factura={id}"""
+        self.__dml.bajas_cambios(f"""
+                                    DELETE FROM sgbdd.factura 
+                                    WHERE id_factura={id}""")
 
-    @SQLABC(conexion=cnx)
     def cambio(self, factura: Factura):
-        return f"""UPDATE factura SET 
-                       id_cliente={factura.cliente.id}, 
-                       fecha_factura=TO_DATE('{factura.fecha.strftime("%m/%d/%Y %H:%M:%S")}', 'MM/DD/YYYY HH24:MI:SS'), 
-                       id_modo_pago={factura.pago.id}
-                       WHERE id_factura={factura.id}"""
+        self.__dml.bajas_cambios(f"""
+                                    UPDATE sgbdd.factura SET 
+                                    id_cliente={factura.cliente.id}, 
+                                    fecha_factura=TO_DATE('{factura.fecha.strftime("%m/%d/%Y %H:%M:%S")}', 
+                                                            'MM/DD/YYYY HH24:MI:SS'), 
+                                    id_modo_pago={factura.pago.id}
+                                    WHERE id_factura={factura.id}""")
 
-    @SQLC(conexion=cnx)
     def consulta(self):
-        return "SELECT * FROM factura"
+        return self.__dml.consulta("SELECT * FROM sgbdd.factura")
 
 
 if __name__ == '__main__':
@@ -35,9 +39,11 @@ if __name__ == '__main__':
     from Controlador.DMLModoPago import DMLModoPago
     from Controlador.DMLCliente import DMLCliente
 
-    dml_fact = DMLFactura()
-    dml_mp = DMLModoPago()
-    dml_clie = DMLCliente()
+    cnx = Conexion("usr_administrador", "123", "localhost/xepdb1")
+
+    dml_fact = DMLFactura(cnx)
+    dml_mp = DMLModoPago(cnx)
+    dml_clie = DMLCliente(cnx)
 
     dml_fact.baja(1)
     dml_clie.baja(1)

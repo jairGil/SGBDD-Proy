@@ -3,45 +3,48 @@ from DML import *
 
 
 class DMLMarca:
+    def __init__(self, conexion: Conexion):
+        self.__conexion = conexion
+        self.__dml = DML(self.__conexion)
 
-    @SQLABC(conexion=cnx)
     def alta(self, marca: Marca):
-        return f"""INSERT INTO marca(id_marca, nombre_marca)  
-                   VALUES ({marca.id},'{marca.nombre}')"""
+        procedimiento = "sgbdd.alta_marca"
+        argumentos = [marca.id, marca.nombre]
+        self.__dml.procedimiento(procedimiento, argumentos)
 
-    @SQLABC(conexion=cnx)
     def baja(self, id: int):
-        return f"""DELETE FROM marca 
-                   WHERE id_marca={id}"""
+        self.__dml.bajas_cambios(f"""
+                                    DELETE FROM sgbdd.marca 
+                                    WHERE id_marca={id}""")
 
-    @SQLABC(conexion=cnx)
     def cambio(self, marca: Marca):
-        return f"""UPDATE marca SET  
-                   nombre_marca='{marca.nombre}'  
-                   WHERE id_marca={marca.id}"""
+        self.__dml.bajas_cambios(f"""
+                                    UPDATE sgbdd.marca SET  
+                                    nombre_marca='{marca.nombre}'  
+                                    WHERE id_marca={marca.id}""")
 
-    @SQLC(conexion=cnx)
     def consulta(self):
-        return "SELECT * FROM marca"
+        return self.__dml.consulta("SELECT * FROM sgbdd.marca")
 
 
 if __name__ == '__main__':
+    cnx = Conexion("usr_administrador", "123", "localhost/xepdb1")
 
-    dml = DMLMarca()
+    dml = DMLMarca(cnx)
 
-    mp = Marca(1, "Fabuloso")
+    mp = Marca(2, "Fabuloso")
     dml.alta(mp)
 
     for cat in dml.consulta():
         print(cat)
 
-    mp = Marca(1, "Mr. Músculo")
+    mp = Marca(2, "Mr. Músculo")
     dml.cambio(mp)
 
     for cat in dml.consulta():
         print(cat)
 
-    dml.baja(1)
+    dml.baja(2)
 
     for cat in dml.consulta():
         print(cat)
