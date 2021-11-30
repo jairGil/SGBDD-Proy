@@ -1,3 +1,4 @@
+from PySide2.QtGui import QDoubleValidator, QIntValidator
 from PySide2.QtWidgets import QWidget, QGridLayout, QLineEdit, QSpacerItem, QSizePolicy, QComboBox, QLabel, QPushButton
 
 
@@ -34,6 +35,8 @@ class CambioProducto(QWidget):
     def setup_ui(self):
         self.cmbx_producto_cambio.setMinimumSize(250, 0)
         self.txt_id_cambio.setEnabled(False)
+        self.txt_stock_cambio.setValidator(QIntValidator())
+        self.txt_precio_cambio.setValidator(QDoubleValidator())
 
         self.layout.addWidget(self.lbl_producto_cambio, 1, 1)
         self.layout.addWidget(self.cmbx_producto_cambio, 1, 2, 1, 2)
@@ -69,3 +72,27 @@ class CambioProducto(QWidget):
 
         self.btn_cancelar_cambio.setObjectName(u"btn_rojo")
         self.btn_modificar_cambio.setObjectName(u"btn_azul")
+
+        self.btn_cancelar_cambio.clicked.connect(self.limpiar_campos)
+
+    def agregar_datos(self):
+        index = self.cmbx_producto_cambio.currentIndex()
+        if index:
+            prod = self.cmbx_producto_cambio.itemData(index)
+            self.txt_id_cambio.setText(str(prod.id))
+            self.txt_nombre_cambio.setText(str(prod.nombre))
+            self.txt_precio_cambio.setText(str(prod.precio))
+            self.txt_stock_cambio.setText(str(prod.stock))
+            self.cmbx_marca_cambio.setCurrentIndex(0)
+            self.cmbx_categoria_cambio.setCurrentIndex(0)
+        else:
+            self.limpiar_campos()
+
+    def limpiar_campos(self):
+        self.txt_id_cambio.setText("")
+        self.txt_nombre_cambio.setText("")
+        self.txt_precio_cambio.setText("")
+        self.txt_stock_cambio.setText("")
+        self.cmbx_marca_cambio.setCurrentIndex(0)
+        self.cmbx_categoria_cambio.setCurrentIndex(0)
+        self.cmbx_producto_cambio.setCurrentIndex(0)

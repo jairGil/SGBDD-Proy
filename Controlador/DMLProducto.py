@@ -12,8 +12,8 @@ class DMLProducto:
 
     def alta(self, producto: Producto):
         procedimiento = "sgbdd.alta_producto"
-        argumentos = [producto.id, producto.nombre, producto.precio, producto.stock, producto.categoria.id,
-                      producto.marca.id]
+        argumentos = [producto.id, producto.nombre, producto.precio, producto.stock, producto.categoria,
+                      producto.marca]
         self.__dml.procedimiento(procedimiento, argumentos)
 
     def baja(self, id: int):
@@ -26,12 +26,25 @@ class DMLProducto:
                                     UPDATE sgbdd.producto SET 
                                     prod = sgbdd.PRODUCTO_OBJ('{producto.nombre}', {producto.precio}), 
                                     stock={producto.stock}, 
-                                    id_categoria={producto.categoria.id}, 
-                                    id_marca={producto.marca.id} 
+                                    id_categoria={producto.categoria}, 
+                                    id_marca={producto.marca} 
                                     WHERE id_producto={producto.id}""")
 
     def consulta(self):
-        return self.__dml.consulta("SELECT * FROM sgbdd.producto")
+        return self.__dml.consulta("""SELECT p.id_producto, TO_CHAR(p.prod.nombre), TO_CHAR(p.prod.precio), p.stock, 
+                                        p.id_marca, p.id_categoria FROM sgbdd.producto p""")
+
+    def consulta_tabla(self):
+        encabezados = ["ID", "Producto", "Precio", "Stock", "Marca", "Categoria"]
+        datos = self.__dml.consulta("""
+                                SELECT p.id_producto, p.prod.nombre, p.prod.precio, p.stock, 
+                                        p.nombre_marca, p.nombre_categoria 
+                                FROM sgbdd.prod p""")
+        return encabezados, datos
+
+    def obten_id(self):
+        id = self.__dml.consulta("SELECT sgbdd.seq_producto.nextval FROM dual")
+        return id[0][0]
 
 
 if __name__ == '__main__':
@@ -52,7 +65,7 @@ if __name__ == '__main__':
 
     m = Marca(1, "Fabuloso")
     c = Categoria(1, "Casa y jardin", "Articulos del hogar")
-    p = Producto(1, "Jabon", 35.5, 30, c, m)
+    p = Producto(1, "Jabon", 35.5, 30, c.id, m.id)
 
     dml_mar.alta(m)
     dml_cat.alta(c)
@@ -61,7 +74,7 @@ if __name__ == '__main__':
     for cat in dml_prod.consulta():
         print(cat)
 
-    p = Producto(1, "Jabon para trastes", 35.7605, 10, c, m)
+    p = Producto(1, "Jabon para trastes", 35.7605, 10, c.id, m.id)
     dml_prod.cambio(p)
 
     for cat in dml_prod.consulta():

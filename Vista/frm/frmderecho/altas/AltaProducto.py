@@ -58,3 +58,12 @@ class AltaProducto(QWidget):
 
         self.btn_cancelar_alta.setObjectName(u"btn_rojo")
         self.btn_agregar_alta.setObjectName(u"btn_azul")
+
+        self.btn_cancelar_alta.clicked.connect(self.limpiar_campos)
+
+    def limpiar_campos(self):
+        self.txt_producto_alta.setText("")
+        self.txt_precio_alta.setText("")
+        self.txt_stock_alta.setValue(0)
+        self.cmbx_marca_alta.setCurrentIndex(0)
+        self.cmbx_categoria_alta.setCurrentIndex(0)

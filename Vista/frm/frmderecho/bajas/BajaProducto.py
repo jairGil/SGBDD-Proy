@@ -74,3 +74,22 @@ class BajaProducto(QWidget):
 
         self.btn_cancelar_baja.setObjectName(u"btn_azul")
         self.btn_eliminar_baja.setObjectName(u"btn_rojo")
+
+        self.btn_cancelar_baja.clicked.connect(self.limpiar_campos)
+
+    def agregar_datos(self):
+        index = self.cmbx_producto_baja.currentIndex()
+        if index:
+            prod = self.cmbx_producto_baja.itemData(index)
+            self.txt_id_baja.setText(str(prod.id))
+            self.txt_producto_baja.setText(str(prod.nombre))
+            self.txt_precio_baja.setText(str(prod.precio))
+            self.txt_stock_baja.setText(str(prod.stock))
+            self.txt_marca_baja.setText(str(prod.text))
+            self.txt_categoria_baja.setText(str(prod.categoria))
+        else:
+            self.limpiar_campos()
+
+    def limpiar_campos(self):
+        for txt in self.txts:
+            txt.setText("")

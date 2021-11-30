@@ -2,6 +2,7 @@ from PySide2.QtCore import Qt
 from PySide2.QtWidgets import QWidget, QHBoxLayout, QFrame, QSplitter, QApplication
 
 from Controlador.Conexion import Conexion
+from Vista.frm.frmderecho.FrmProducto import FrmProducto
 from Vista.frm.principal.FrmPrincipalDer import FrmPrincipalDer
 from Vista.frm.principal.FrmPrincipalIzq import FrmPrincipalIzq
 
@@ -47,7 +48,6 @@ class FrmPrincipal(QWidget):
     def change_pages(self) -> None:
         if self.frm_izquierdo.btn_inicio.isChecked():
             self.frm_derecho.stack.setCurrentIndex(0)
-            self.frm_derecho.stack.currentWidget()
         if self.frm_izquierdo.btn_categoria.isChecked():
             self.frm_derecho.stack.setCurrentIndex(1)
         if self.frm_izquierdo.btn_marca.isChecked():

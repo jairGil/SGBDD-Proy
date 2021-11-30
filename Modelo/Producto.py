@@ -7,10 +7,10 @@ class Producto:
     nombre: str
     precio: float
     stock: int
-    categoria: Categoria
-    marca: Marca
+    categoria: int
+    marca: int
 
-    def __init__(self, id: int, nombre: str, precio: float, stock: int, categoria: Categoria, marca: Marca) -> None:
+    def __init__(self, id: int, nombre: str, precio: float, stock: int, categoria: int, marca: int) -> None:
         self.id = id
         self.nombre = nombre
         self.precio = precio
