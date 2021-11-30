@@ -1,7 +1,8 @@
 import cx_Oracle
 
+from Controlador.Conexion import Conexion
 from Modelo.Producto import Producto
-from DML import *
+from Controlador.DML import DML
 
 
 class DMLProducto:

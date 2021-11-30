@@ -35,7 +35,7 @@ class DMLCategoria:
         datos = self.__dml.consulta("""
                                 SELECT c.id_categoria, c.nombre_categoria, c.descripcion_categoria, count(p.id_producto)
                                 FROM sgbdd.producto p 
-                                JOIN categoria c ON c.id_categoria = p.id_categoria
+                                JOIN sgbdd.categoria c ON c.id_categoria = p.id_categoria
                                 GROUP BY c.id_categoria, c.nombre_categoria, c.descripcion_categoria 
                                 ORDER BY c.id_categoria""")
         return encabezados, datos

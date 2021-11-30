@@ -1,7 +1,8 @@
 import cx_Oracle
 
+from Controlador.Conexion import Conexion
 from Modelo.Factura import Factura
-from DML import *
+from Controlador.DML import DML
 
 
 class DMLFactura:

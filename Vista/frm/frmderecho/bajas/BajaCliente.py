@@ -69,3 +69,24 @@ class BajaCliente(QWidget):
 
         self.btn_cancelar_baja.setObjectName(u"btn_azul")
         self.btn_eliminar_baja.setObjectName(u"btn_rojo")
+
+        self.btn_cancelar_baja.clicked.connect(self.limpiar_campos)
+
+    def agregar_datos(self):
+        index = self.cmbx_cliente_baja.currentIndex()
+        if index:
+            cliente = self.cmbx_cliente_baja.itemData(index)
+            self.txt_id_baja.setText(str(cliente.id))
+            self.txt_nombre_baja.setText(str(cliente.nombre))
+            self.txt_apellido_baja.setText(str(cliente.apellido))
+            self.txt_email_baja.setText(str(cliente.email))
+            self.txt_telefono_baja.setText(str(cliente.telefono))
+        else:
+            self.limpiar_campos()
+
+    def limpiar_campos(self):
+        self.txt_id_baja.setText("")
+        self.txt_nombre_baja.setText("")
+        self.txt_apellido_baja.setText("")
+        self.txt_email_baja.setText("")
+        self.txt_telefono_baja.setText("")

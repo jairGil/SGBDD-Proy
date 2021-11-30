@@ -64,3 +64,24 @@ class CambioCliente(QWidget):
 
         self.btn_cancelar_cambio.setObjectName(u"btn_rojo")
         self.btn_modificar_cambio.setObjectName(u"btn_azul")
+
+        self.btn_cancelar_cambio.clicked.connect(self.limpiar_campos)
+
+    def agregar_datos(self):
+        index = self.cmbx_cliente_cambio.currentIndex()
+        if index:
+            cliente = self.cmbx_cliente_cambio.itemData(index)
+            self.txt_id_cambio.setText(str(cliente.id))
+            self.txt_nombre_cambio.setText(str(cliente.nombre))
+            self.txt_apellido_cambio.setText(str(cliente.apellido))
+            self.txt_email_cambio.setText(str(cliente.email))
+            self.txt_telefono_cambio.setText(str(cliente.telefono))
+        else:
+            self.limpiar_campos()
+
+    def limpiar_campos(self):
+        self.txt_id_cambio.setText("")
+        self.txt_nombre_cambio.setText("")
+        self.txt_apellido_cambio.setText("")
+        self.txt_email_cambio.setText("")
+        self.txt_telefono_cambio.setText("")

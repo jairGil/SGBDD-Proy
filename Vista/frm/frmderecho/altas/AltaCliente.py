@@ -27,7 +27,6 @@ class AltaCliente(QWidget):
 
     def setup_ui(self):
         self.txt_email_alta.setMinimumSize(250, 0)
-        self.txt_nombre_alta.setValidator(QDoubleValidator())
 
         self.layout.addWidget(self.lbl_email_alta, 1, 1)
         self.layout.addWidget(self.txt_email_alta, 1, 2, 1, 2)
@@ -52,3 +51,11 @@ class AltaCliente(QWidget):
 
         self.btn_cancelar_alta.setObjectName(u"btn_rojo")
         self.btn_agregar_alta.setObjectName(u"btn_azul")
+
+        self.btn_cancelar_alta.clicked.connect(self.limpiar_campos)
+
+    def limpiar_campos(self):
+        self.txt_nombre_alta.setText("")
+        self.txt_apellido_alta.setText("")
+        self.txt_email_alta.setText("")
+        self.txt_telefono_alta.setText("")
