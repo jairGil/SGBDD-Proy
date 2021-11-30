@@ -6,7 +6,7 @@ from Vista.frm.frmderecho.FrmInicio import FrmInicio
 from Vista.frm.frmderecho.FrmCategoria import FrmCategoria
 from Vista.frm.frmderecho.FrmCliente import FrmCliente
 from Vista.frm.frmderecho.FrmFactura import FrmFactura
-from Vista.frm.frmderecho.FrmHistorialPrecio import FrmHistorialPrecio
+from Vista.frm.frmderecho.FrmHistorialTransacciones import FrmHistorialTransacciones
 from Vista.frm.frmderecho.FrmHistorialProducto import FrmHistorialProducto
 from Vista.frm.frmderecho.FrmMarca import FrmMarca
 from Vista.frm.frmderecho.FrmModoPago import FrmModoPago
@@ -22,13 +22,13 @@ class FrmPrincipalDer(QFrame):
         self.stack = QStackedWidget(self)
         self.frm_inicio = FrmInicio(self)
         self.frm_categoria = FrmCategoria(self)
-        self.frm_marca = FrmMarca()
-        self.frm_producto = FrmProducto()
-        self.frm_modo_pago = FrmModoPago()
-        self.frm_cliente = FrmCliente()
-        self.frm_factura = FrmFactura()
-        self.frm_historial_producto = FrmHistorialProducto()
-        self.frm_historial_precio = FrmHistorialPrecio()
+        self.frm_marca = FrmMarca(self)
+        self.frm_producto = FrmProducto(self)
+        self.frm_modo_pago = FrmModoPago(self)
+        self.frm_cliente = FrmCliente(self)
+        self.frm_factura = FrmFactura(self)
+        self.frm_historial_producto = FrmHistorialProducto(self)
+        self.frm_historial_precio = FrmHistorialTransacciones(self)
 
         self.setup_ui()
 

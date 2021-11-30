@@ -1,5 +1,6 @@
+from Controlador.Conexion import Conexion
 from Modelo.ModoPago import ModoPago
-from DML import *
+from Controlador.DML import DML
 
 
 class DMLModoPago:
@@ -25,7 +26,13 @@ class DMLModoPago:
                                     WHERE id_modo_pago={modo_pago.id}""")
 
     def consulta(self):
-        return self.__dml.consulta("SELECT * FROM sgbdd.modo_pago")
+        encabezados = ["ID", "Nombre", "Detalles"]
+        datos = self.__dml.consulta("SELECT * FROM sgbdd.modo_pago")
+        return encabezados, datos
+
+    def obten_id(self):
+        id = self.__dml.consulta("SELECT sgbdd.seq_modo_pago.nextval FROM dual")
+        return id[0][0]
 
 
 if __name__ == '__main__':

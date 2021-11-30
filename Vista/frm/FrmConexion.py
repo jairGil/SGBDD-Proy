@@ -53,16 +53,13 @@ class FrmConexion(QWidget):
 
         self.estado_con, conexion_error = self.__con.conectar()
         if self.estado_con == 1:
-            print("conectado")
-            print(conexion_error.username)
-            print(conexion_error.tag)
             self.parent().parent().set_conexion(self.__con)
         elif self.estado_con == -1:
             s = f"Error de Conexion \n\n{conexion_error}"
-            self.__dlg_aviso = DlgAviso(s)
+            self.__dlg_aviso = DlgAviso(self, s)
         elif self.estado_con == -2:
             s = f"Error de Base de datos \n\n{conexion_error}"
-            self.__dlg_aviso = DlgAviso(s)
+            self.__dlg_aviso = DlgAviso(self, s)
 
 
 if __name__ == '__main__':

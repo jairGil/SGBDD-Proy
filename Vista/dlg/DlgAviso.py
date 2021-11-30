@@ -1,11 +1,11 @@
 from PySide2.QtCore import Qt
 from PySide2.QtGui import QFont
-from PySide2.QtWidgets import QDialog, QGridLayout, QLabel, QPushButton
+from PySide2.QtWidgets import QDialog, QGridLayout, QLabel, QPushButton, QWidget
 
 
 class DlgAviso(QDialog):
-    def __init__(self, s: str):
-        super().__init__()
+    def __init__(self, parent: QWidget, s: str):
+        super().__init__(parent=parent)
         self.gridLayout = QGridLayout(self)
         self.lbl_error = QLabel(s, self)
         self.btn_cerrar = QPushButton("Cerrar", self)
@@ -54,6 +54,6 @@ if __name__ == '__main__':
     frm = QMainWindow()
     frm.show()
     st = "Este es un mensaje de prueba del texto de la ventana"
-    dlg = DlgAviso(st)
+    dlg = DlgAviso(frm, st)
     dlg.show()
     sys.exit(app.exec_())

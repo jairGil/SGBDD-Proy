@@ -1,15 +1,14 @@
 from PySide2.QtWidgets import QWidget, QGridLayout
 
-from Controlador.DMLHistorialProducto import DMLHistorialProducto
+from Controlador.DMLHistorialTransacciones import DMLHistorialTransacciones
 from Vista.frm.frmderecho.consultas.Consulta import Consulta
 
 
-class FrmHistorialProducto(QWidget):
+class FrmHistorialTransacciones(QWidget):
     def __init__(self, parent: QWidget):
         super().__init__(parent=parent)
         self.conexion = self.parent().conexion
-        self.dml = DMLHistorialProducto(self.conexion)
-
+        self.dml = DMLHistorialTransacciones(self.conexion)
         self.layout = QGridLayout(self)
         self.consulta = Consulta()
 
@@ -30,6 +29,6 @@ if __name__ == '__main__':
     from PySide2.QtWidgets import QApplication
 
     app = QApplication(sys.argv)
-    w = FrmHistorialProducto()
+    w = FrmHistorialTransacciones()
     w.show()
     sys.exit(app.exec_())

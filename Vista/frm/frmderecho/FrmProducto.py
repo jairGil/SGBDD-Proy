@@ -1,5 +1,7 @@
-from PySide2.QtWidgets import QTabWidget
+from PySide2.QtWidgets import QTabWidget, QWidget
 
+from Controlador.DMLProducto import DMLProducto
+from Vista.dlg.DlgAviso import DlgAviso
 from Vista.frm.frmderecho.altas.AltaProducto import AltaProducto
 from Vista.frm.frmderecho.bajas.BajaProducto import BajaProducto
 from Vista.frm.frmderecho.cambios.CambioProducto import CambioProducto
@@ -7,8 +9,13 @@ from Vista.frm.frmderecho.consultas.Consulta import Consulta
 
 
 class FrmProducto(QTabWidget):
-    def __init__(self):
-        super().__init__()
+    __dlg_aviso: DlgAviso
+
+    def __init__(self, parent: QWidget):
+        super().__init__(parent=parent)
+        self.conexion = self.parent().conexion
+        self.dml = DMLProducto(self.conexion)
+
         self.alta = AltaProducto()
         self.baja = BajaProducto()
         self.cambio = CambioProducto()

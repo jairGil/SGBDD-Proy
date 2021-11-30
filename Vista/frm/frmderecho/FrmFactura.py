@@ -1,10 +1,18 @@
 from PySide2.QtWidgets import QFrame, QGridLayout, QLabel, QLineEdit, QPushButton, QSizePolicy, QSpacerItem, \
     QVBoxLayout, QWidget
 
+from Controlador.DMLFactura import DMLFactura
+from Vista.dlg.DlgAviso import DlgAviso
+
 
 class FrmFactura(QWidget):
-    def __init__(self):
-        super().__init__()
+    __dlg_aviso: DlgAviso
+
+    def __init__(self, parent: QWidget):
+        super().__init__(parent=parent)
+        self.conexion = self.parent().conexion
+        self.dml = DMLFactura(self.conexion)
+
         self.layout_principal = QGridLayout(self)
         self.lbl_id_buscar = QLabel("ID FACTURA:", self)
         self.txt_id = QLineEdit(self)

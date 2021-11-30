@@ -41,12 +41,13 @@ class FrmPrincipal(QWidget):
         self.frm_izquierdo.btn_cliente.clicked.connect(self.change_pages)
         self.frm_izquierdo.btn_factura.clicked.connect(self.change_pages)
         self.frm_izquierdo.btn_historial_productos.clicked.connect(self.change_pages)
-        self.frm_izquierdo.btn_historial_precios.clicked.connect(self.change_pages)
+        self.frm_izquierdo.btn_historial_transacciones.clicked.connect(self.change_pages)
         self.frm_izquierdo.btn_salir.clicked.connect(self.regresar)
 
     def change_pages(self) -> None:
         if self.frm_izquierdo.btn_inicio.isChecked():
             self.frm_derecho.stack.setCurrentIndex(0)
+            self.frm_derecho.stack.currentWidget()
         if self.frm_izquierdo.btn_categoria.isChecked():
             self.frm_derecho.stack.setCurrentIndex(1)
         if self.frm_izquierdo.btn_marca.isChecked():
@@ -61,7 +62,7 @@ class FrmPrincipal(QWidget):
             self.frm_derecho.stack.setCurrentIndex(6)
         if self.frm_izquierdo.btn_historial_productos.isChecked():
             self.frm_derecho.stack.setCurrentIndex(7)
-        if self.frm_izquierdo.btn_historial_precios.isChecked():
+        if self.frm_izquierdo.btn_historial_transacciones.isChecked():
             self.frm_derecho.stack.setCurrentIndex(8)
 
     def regresar(self):

@@ -40,3 +40,7 @@ class AltaModoPago(QWidget):
 
         self.btn_cancelar_alta.setObjectName(u"btn_rojo")
         self.btn_agregar_alta.setObjectName(u"btn_azul")
+
+    def limpiar_campos(self):
+        self.txt_mpago_alta.setText("")
+        self.txt_detalles_alta.setText("")

@@ -1,5 +1,6 @@
+from Controlador.Conexion import Conexion
 from Modelo.Marca import Marca
-from DML import *
+from Controlador.DML import DML
 
 
 class DMLMarca:
@@ -24,7 +25,13 @@ class DMLMarca:
                                     WHERE id_marca={marca.id}""")
 
     def consulta(self):
-        return self.__dml.consulta("SELECT * FROM sgbdd.marca")
+        encabezados = ["ID", "Nombre"]
+        datos = self.__dml.consulta("SELECT * FROM sgbdd.marca")
+        return encabezados, datos
+
+    def obten_id(self):
+        id = self.__dml.consulta("SELECT sgbdd.seq_marca.nextval FROM dual")
+        return id[0][0]
 
 
 if __name__ == '__main__':

@@ -35,3 +35,6 @@ class AltaMarca(QWidget):
 
         self.btn_cancelar_alta.setObjectName(u"btn_rojo")
         self.btn_agregar_alta.setObjectName(u"btn_azul")
+
+    def limpiar_campos(self):
+        self.txt_marca_alta.setText("")

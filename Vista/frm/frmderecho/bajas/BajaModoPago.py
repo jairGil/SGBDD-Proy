@@ -56,3 +56,20 @@ class BajaModoPago(QWidget):
 
         self.btn_cancelar_baja.setObjectName(u"btn_azul")
         self.btn_eliminar_baja.setObjectName(u"btn_rojo")
+
+        self.btn_cancelar_baja.clicked.connect(self.limpiar_campos)
+
+    def agregar_datos(self):
+        index = self.cmbx_mpago_baja.currentIndex()
+        if index:
+            mpago = self.cmbx_mpago_baja.itemData(index)
+            self.txt_id_baja.setText(str(mpago.id))
+            self.txt_nombre_baja.setText(str(mpago.nombre))
+            self.txt_detalle_baja.setText(str(mpago.detalles))
+        else:
+            self.limpiar_campos()
+
+    def limpiar_campos(self):
+        self.txt_id_baja.setText("")
+        self.txt_nombre_baja.setText("")
+        self.txt_detalle_baja.setText("")

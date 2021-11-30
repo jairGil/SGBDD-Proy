@@ -10,7 +10,7 @@ class DMLCategoria:
 
     def alta(self, categoria: Categoria):
         procedimiento = "sgbdd.alta_categoria"
-        argumentos = [categoria.id, categoria.nombre, categoria.descripcion]
+        argumentos = [categoria.id, str(categoria.nombre), str(categoria.descripcion)]
         self.__dml.procedimiento(procedimiento, argumentos)
 
     def baja(self, id: int):
@@ -26,10 +26,23 @@ class DMLCategoria:
             WHERE id_categoria={categoria.id}""")
 
     def consulta(self):
-        encabezados = ["ID", "Nombre", "Descripcion"]
-        datos = self.__dml.consulta("SELECT id_categoria, nombre_categoria, descripcion_categoria " 
-                                    "FROM sgbdd.categoria")
+        datos = self.__dml.consulta("""SELECT id_categoria, nombre_categoria, descripcion_categoria 
+                                        FROM sgbdd.categoria""")
+        return datos
+
+    def consulta_tabla(self):
+        encabezados = ["ID", "Nombre", "Descripcion", "Cantidad de productos"]
+        datos = self.__dml.consulta("""
+                                SELECT c.id_categoria, c.nombre_categoria, c.descripcion_categoria, count(p.id_producto)
+                                FROM sgbdd.producto p 
+                                JOIN categoria c ON c.id_categoria = p.id_categoria
+                                GROUP BY c.id_categoria, c.nombre_categoria, c.descripcion_categoria 
+                                ORDER BY c.id_categoria""")
         return encabezados, datos
+
+    def obten_id(self):
+        id = self.__dml.consulta("SELECT sgbdd.seq_categoria.nextval FROM dual")
+        return id[0][0]
 
 
 if __name__ == '__main__':

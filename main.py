@@ -33,7 +33,7 @@ class Window(QMainWindow):
         combo_box.setGeometry(200, 150, 120, 40)
 
         for i in self.modo_pagos:
-            combo_box.addItem(str(i), i)
+            combo_box.addItem(ing(i), i)
 
         print(combo_box.itemData(2))
 
@@ -49,6 +49,14 @@ class Window(QMainWindow):
 if __name__ == '__main__':
     import sys
 
-    app = QApplication(sys.argv)
+    """app = QApplication(sys.argv)
     frm = FrmApp()
-    sys.exit(app.exec_())
+    sys.exit(app.exec_())"""
+    ing = "dfh"
+    ing2 = ""
+
+    if ing and ing2:
+        print("Dentro del if")
+    else:
+        print("Len = 0")
+

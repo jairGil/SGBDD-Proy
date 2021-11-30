@@ -1,5 +1,6 @@
+from Controlador.Conexion import Conexion
 from Modelo.Cliente import Cliente
-from DML import *
+from Controlador.DML import DML
 
 
 class DMLCliente:
@@ -27,7 +28,15 @@ class DMLCliente:
                                     WHERE id_cliente={cliente.id}""")
 
     def consulta(self):
-        return self.__dml.consulta("SELECT * FROM sgbdd.cliente")
+        encabezados = ["ID", "Nombre", "Apellido", "Email", "Telefono"]
+        datos = self.__dml.consulta("""
+                                    SELECT id_cliente, nombre_cliente, apellido_cliente, email_cliente, telefono_cliente
+                                    FROM sgbdd.cliente""")
+        return encabezados, datos
+
+    def obten_id(self):
+        id = self.__dml.consulta("SELECT sgbdd.seq_cliente.nextval FROM dual")
+        return id[0][0]
 
 
 if __name__ == '__main__':

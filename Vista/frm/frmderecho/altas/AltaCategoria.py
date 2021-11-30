@@ -40,3 +40,9 @@ class AltaCategoria(QWidget):
 
         self.btn_cancelar_alta.setObjectName(u"btn_rojo")
         self.btn_agregar_alta.setObjectName(u"btn_azul")
+
+        self.btn_cancelar_alta.clicked.connect(self.limpiar_campos)
+
+    def limpiar_campos(self):
+        self.txt_categoria_alta.setText("")
+        self.txt_descripcion_alta.setText("")

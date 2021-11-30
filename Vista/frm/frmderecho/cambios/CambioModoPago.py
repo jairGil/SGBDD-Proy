@@ -54,3 +54,20 @@ class CambioModoPago(QWidget):
 
         self.btn_cancelar_cambio.setObjectName(u"btn_rojo")
         self.btn_modificar_cambio.setObjectName(u"btn_azul")
+
+        self.btn_cancelar_cambio.clicked.connect(self.limpiar_campos)
+
+    def agregar_datos(self):
+        index = self.cmbx_mpago_cambio.currentIndex()
+        if index:
+            mpago = self.cmbx_mpago_cambio.itemData(index)
+            self.txt_id_cambio.setText(str(mpago.id))
+            self.txt_nombre_cambio.setText(str(mpago.nombre))
+            self.txt_detalle_cambio.setText(str(mpago.detalles))
+        else:
+            self.limpiar_campos()
+
+    def limpiar_campos(self):
+        self.txt_id_cambio.setText("")
+        self.txt_nombre_cambio.setText("")
+        self.txt_detalle_cambio.setText("")

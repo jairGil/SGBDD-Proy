@@ -50,3 +50,19 @@ class BajaMarca(QWidget):
 
         self.btn_cancelar_baja.setObjectName(u"btn_azul")
         self.btn_eliminar_baja.setObjectName(u"btn_rojo")
+
+        self.btn_cancelar_baja.clicked.connect(self.limpiar_campos)
+
+    def agregar_datos(self):
+        index = self.cmbx_marca_baja.currentIndex()
+        if index:
+            marca = self.cmbx_marca_baja.itemData(index)
+            self.txt_id_baja.setText(str(marca.id))
+            self.txt_nombre_baja.setText(str(marca.nombre))
+        else:
+            self.limpiar_campos()
+
+    def limpiar_campos(self):
+        self.cmbx_marca_baja.setCurrentIndex(0)
+        self.txt_id_baja.setText("")
+        self.txt_nombre_baja.setText("")

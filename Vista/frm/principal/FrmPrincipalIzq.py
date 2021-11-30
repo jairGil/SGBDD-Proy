@@ -13,12 +13,12 @@ class FrmPrincipalIzq(QFrame):
         self.btn_cliente = QPushButton("Cliente", self)
         self.btn_factura = QPushButton("Factura", self)
         self.btn_historial_productos = QPushButton("Historial Productos", self)
-        self.btn_historial_precios = QPushButton("Historial Precios", self)
+        self.btn_historial_transacciones = QPushButton("Historial Transacciones", self)
         self.btn_salir = QPushButton("Salir", self)
         self.spacer = QSpacerItem(20, 40, vData=QSizePolicy.Expanding)
 
         self.botones = [self.btn_inicio, self.btn_categoria, self.btn_marca, self.btn_producto, self.btn_modo_pago,
-                        self.btn_cliente, self.btn_factura, self.btn_historial_productos, self.btn_historial_precios]
+                        self.btn_cliente, self.btn_factura, self.btn_historial_productos, self.btn_historial_transacciones]
 
         self.setup_ui()
 
